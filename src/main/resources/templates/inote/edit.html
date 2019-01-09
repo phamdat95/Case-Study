@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Inote</title>
+</head>
+<body>
+<h1>Edit Inote!</h1>
+<p>
+    <a th:href="@{/list}">Back to list</a>
+</p>
+<p th:if="${message}">
+    <a th:text="${message}"></a>
+</p>
+<fieldset>
+    <legend>Fill Information</legend>
+    <form th:action="@{/edit}" method="post" th:object="${inote}">
+        <input type="hidden" th:field="*{id}">
+        <table>
+            <tr>
+                <th>Title</th>
+                <th><input type="text" th:field="*{title}"></th>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <th><input type="text" th:field="*{content}"></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <select th:field="*{inoteType}">
+                        <option th:each="p : ${noteType}" th:value="${p.id}" th:text="${p.name}"></option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th></th>
+                <th><input type="submit" value="Update"></th>
+            </tr>
+        </table>
+    </form>
+</fieldset>
+</body>
+</html>

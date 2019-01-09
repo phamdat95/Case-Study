@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Note type</title>
+</head>
+<body>
+<h1>Note Type List</h1>
+<p>
+    <a class="form" th:href="@{/create-type}">Create note type</a>
+</p>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="inotes : ${type}">
+        <tr>
+            <td th:text="${inotes.name}"></td>
+            <td th:text="${inotes.description}"></td>
+            <td><a th:href="@{/edit-type/__${inotes.id}__}">Edit</a></td>
+            <td><a th:href="@{/delete-type/__${inotes.id}__}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inote</title>
+</head>
+<body>
+<h1>Inote List</h1>
+<p>
+    <a class="form" th:href="@{/create}">Create Inote</a>
+</p>
+<form th:action="@{/list-search}" method="get">
+    <p>
+        <input type="text" name="s">
+        <input type="submit">
+    </p>
+</form>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="inotes : ${inote}">
+        <tr>
+            <td th:text="${inotes.title}"></td>
+            <td th:text="${inotes.content}"></td>
+            <td th:text="${inotes.inoteType.name}"></td>
+            <td><a th:href="@{/edit/__${inotes.id}__}">Edit</a></td>
+            <td><a th:href="@{/delete/__${inotes.id}__}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+<div>
+    <a th:href="@{/list(page=${inote.number - 1})}" th:if="${inote.hasPrevious()}">Previous</a>
+    <span th:text="${inote.number + 1}"></span>/<span th:text="${inote.totalPages}"></span>
+    <a th:href="@{/list(page=${inote.number + 1})}" th:if="${inote.hasNext()}">Next</a>
+</div>
+</body>
+</html>
